@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,500,700" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="stylesheet" href="style/style.css">
+    <title>A Multi-Step Form</title>
+</head>
+<body>
+    <div class="container" data-click="false">
+        <nav class="sidenav">
+            <div class="sidenav__bg">
+                <img src="images/bg-sidebar-mobile.svg" class="svg sidenav__bg-mob">
+                <img src="images/bg-sidebar-desktop.svg" class="sidenav__bg-desk svg">
+            </div>
+            
+            <ul class="sidenav__list">
+                <li class="sidenav__list-item">
+                    <span data-indicator="list-tag" class="list-tag list-tag--active">1</span>
+                    <span class="sidenav__list-text">
+                        <span class="sidenav__list-description description u-color-gray-dark">Step 1</span>
+                        <span class="sidenav__list-title">
+                            Your info
+                        </span>
+                    </span>
+                </li>
+                <li class="sidenav__list-item">
+                    <span data-indicator="list-tag" class="list-tag">2</span>
+                    <span class="sidenav__list-text">
+                        <span class="sidenav__list-description description u-color-gray-dark">Step 2</span>
+                        <span class="sidenav__list-title">
+                            Select plan
+                        </span>
+                    </span>
+                </li>
+                <li class="sidenav__list-item">
+                    <span data-indicator="list-tag" class="list-tag">3</span>
+                    <span class="sidenav__list-text">
+                        <span class="sidenav__list-description description u-color-gray-dark">Step 3</span>
+                        <span class="sidenav__list-title">
+                            Add-ons
+                        </span>
+                    </span>
+                </li>
+                <li class="sidenav__list-item">
+                    <span data-indicator="list-tag" class="list-tag">4</span>
+                    <span class="sidenav__list-text">
+                        <span class="sidenav__list-description description u-color-gray-dark">Step 4</span>
+                        <span class="sidenav__list-title">
+                            Summary
+                        </span>
+                    </span>
+                </li>
+            </ul>
+        </nav>
+        <main class="subscription">
+            <form onsubmit="validateInput(event,this);" data-form-type="input-field" data-step="info" class="subscription__step" novalidate>
+                <div class="subscription__content">
+                    <h1 class="heading-primary u-color-pri">Personal info</h1>
+                    <p class="paragraph u-mb-medium">Please provide your name, email address, and phone number.</p>
+                    <fieldset class="form">
+                        <span class="flex-sb">
+                            <label for="name" class="form__label">Name</label>
+                            <span data-msg="error" data-msg1="error" class="description u-color-rd"></span>
+                        </span>
+                        <input oninput="hideErrOutline(this, '[data-msg1=error]')" data-elem="input" id="name" class="form__input border u-p-small u-br-small" placeholder="e.g. Stephen King" type="text" required/>
+                        
+                        <span class="flex-sb">
+                            <label for="email" class="form__label">Email Address</label>
+                            <span data-msg="error" data-msg2="error" class="description u-color-rd"></span>
+                        </span>
+                        <input oninput="hideErrOutline(this, '[data-msg2=error]')" data-elem="input" id="email" class="form__input border u-p-small u-br-small" placeholder="e.g. stephenking@lorem.com" type="email" required/>
+
+                        <span class="flex-sb">
+                            <label for="number" class="form__label">Phone Number</label>
+                            <span data-msg="error" data-msg3="error" class="description u-color-rd"></span>
+                        </span>
+                        <input oninput="hideErrOutline(this, '[data-msg3=error]')" data-elem="input" id="number" class="form__input border u-p-small u-br-small" placeholder="e.g. +1 234 567 890" type="number" required/>
+                    </fieldset>
+                </div>
+
+                <div class="subscription__nav">
+                    <div class="flex-sb">
+                        <i></i> <button class="btn btn--blue">Next Step</button>
+                    </div>
+                </div>
+            </form>
+
+            <form onsubmit="isChecked(event, this)" data-form-type="radio" data-step="plan" class="subscription__step">
+                <div class="subscription__content">
+                    <h1 class="heading-primary u-color-pri">Select your plan</h1>
+                    <p class="paragraph u-mb-medium">You have the option of monthly or yearly billing.</p>
+
+                    <span data-msg="error" class="description u-color-rd"></span>
+                    <fieldset onclick="hideErrOutline(this, '[data-msg=error]')" class="u-mb-small subscription__radio-btn-con">
+                        <input id="arcade" class="checkbox__input hide" type="radio" name="plan" value="Arcade">
+                        <label data-elem="label" for="arcade" class="subscription__radio-btn checkbox__switch u-inline-bl border u-p-small u-br-small">
+                            <span class="subscription__icon">
+                                <img src="images/icon-arcade.svg" class="svg">
+                            </span>
+                            <span>
+                                <span class="heading-tertiary u-color-pri">Arcade</span> <br>
+                                <span class="paragraph">
+                                    <span class="view" data-sub-duration="Monthly">
+                                        <span class="description" data-amnt="9">$9/mo</span>
+                                    </span>
+                                    <span class="hide" data-sub-duration="Yearly">
+                                        <span class="description" data-amnt="90">$90/yr</span> <br>
+                                        <span class="description u-color-pri u-text-bold">2 months free</span>
+                                    </span>
+                                </span>
+                            </span>
+                        </label>
+
+                        <input id="advanced" class="checkbox__input hide" type="radio" name="plan" value="Advanced">
+                        <label data-elem="label" for="advanced" class="subscription__radio-btn checkbox__switch u-inline-bl border u-p-small u-br-small">
+                            <span class="subscription__icon">
+                                <img src="images/icon-advanced.svg" class="svg">
+                            </span>
+                            <span>
+                                <span class="heading-tertiary u-color-pri">Advanced</span> <br>
+                                <span class="paragraph">
+                                    <span class="view" data-sub-duration="Monthly">
+                                        <span class="description" data-amnt="12">$12/mo</span>
+                                    </span>
+                                    <span class="hide" data-sub-duration="Yearly">
+                                        <span class="description" data-amnt="120">$120/yr</span> <br>
+                                        <span class="description u-color-pri u-text-bold">2 months free</span>
+                                    </span>
+                                </span>
+                            </span>
+                        </label>
+
+                        <input id="pro" class="checkbox__input hide" type="radio" name="plan" value="Pro">
+                        <label data-elem="label" for="pro" class="subscription__radio-btn checkbox__switch u-inline-bl border u-p-small u-br-small">
+                            <span class="subscription__icon">
+                                <img src="images/icon-pro.svg" class="svg">
+                            </span>
+                            <span>
+                                <span class="heading-tertiary u-color-pri">Pro</span> <br>
+                                <span class="paragraph">
+                                    <span class="view" data-sub-duration="Monthly">
+                                        <span class="description" data-amnt="15">$15/mo</span>
+                                    </span>
+                                    <span class="hide" data-sub-duration="Yearly">
+                                        <span class="description" data-amnt="150">$150/yr</span> <br>
+                                        <span class="description u-color-pri u-text-bold">2 months free</span>
+                                    </span>
+                                </span>
+                            </span>
+                        </label>
+                    </fieldset>
+                    
+                    <div class="toggle u-p-small u-bg-light u-ta-center u-br-small">
+                        <input oninput="toggleSwitch('[data-sub-duration]', 'hide')" id="period" type="checkbox" class="toggle__input hide"`>
+                        <span class="toggle__off description u-text-bold">Monthly</span>
+                        <label for="period" class="toggle__switch u-inline-bl">
+                            <span class="toggle__slider"></span>
+                        </label>
+                        <span class="toggle__on description u-text-bold">Yearly</span>
+                    </div>
+                </div>
+                <div class="subscription__nav">
+                    <div class="flex-sb">
+                        <button onclick="plusContent(event,-1)" class="btn btn--transparent">Go Back</button>
+                        <button class="btn btn--blue">Next Step</button>
+                    </div>
+                </div>
+            </form>
+
+            <form onsubmit="isChecked(event, this); purchaseSummary()" data-form-type="label" data-step="add-ons" class="subscription__step">
+                <div class="subscription__content">
+                    <h1 class="heading-primary u-color-pri">Pick add-ons</h1>
+                    <p class="paragraph u-mb-medium">Add-ons help enhance your gaming experience.</p>
+
+                    <span data-msg="error" class="description u-color-rd"></span>
+                    <fieldset onclick="hideErrOutline(this, '[data-msg=error]')">
+                        <input id="online-service" class="checkbox__input hide" type="checkbox" name="add-on1" value="Online service">
+                        <label data-elem="label" for="online-service" class="subscription__checkbox-btn flex-sb checkbox__switch border u-br-small">
+                            <span class="flex-sb">
+                                <span class="checkbox__checkmark-icon">
+                                    <img src="images/icon-checkmark.svg" class="svg">
+                                </span>
+                                <span class="paragraph">
+                                    <span class="heading-tertiary u-color-pri">Online service</span> <br>
+                                    <span class="description">Access to multiplayer games</span>
+                                </span>
+                            </span>
+                            <span class="view" data-sub-duration="Monthly">
+                                <span class="description u-color-pri-light" data-amnt="1">+$1/mo</span>
+                            </span>
+                            <span class="hide" data-sub-duration="Yearly">
+                                <span class="description u-color-pri-light" data-amnt="10">+$10/yr</span> <br>
+                            </span>
+                        </label>
+
+                        <input id="larger-storage" class="checkbox__input hide" type="checkbox" name="add-on2" value="Larger storage">
+                        <label data-elem="label" for="larger-storage" class="subscription__checkbox-btn flex-sb checkbox__switch border u-br-small">
+                            <span class="flex-sb">
+                                <span class="checkbox__checkmark-icon">
+                                    <img src="images/icon-checkmark.svg" class="svg">
+                                </span>
+                                <span class="paragraph">
+                                    <span class="heading-tertiary u-color-pri">Larger storage</span> <br>
+                                    <span class="description">Extra 1TB of cloud save</span>
+                                </span>
+                            </span>
+                            <span class="view" data-sub-duration="Monthly">
+                                <span class="description u-color-pri-light" data-amnt="2">+$2/mo</span>
+                            </span>
+                            <span class="hide" data-sub-duration="Yearly">
+                                <span class="description u-color-pri-light" data-amnt="20">+$20/yr</span> <br>
+                            </span>
+                        </label>
+
+                        <input id="customizable-pro" class="checkbox__input hide" type="checkbox" name="add-on3" value="Customizable Profile">
+                        <label data-elem="label" for="customizable-pro" class="subscription__checkbox-btn flex-sb checkbox__switch border u-br-small">
+                            <span class="flex-sb">
+                                <span class="checkbox__checkmark-icon">
+                                    <img src="images/icon-checkmark.svg" class="svg">
+                                </span>
+                                <span class="paragraph">
+                                    <span class="heading-tertiary u-color-pri">Customizable Profile</span> <br>
+                                    <span class="description">Custom theme on your profile</span>
+                                </span>
+                            </span>
+                            <span class="view" data-sub-duration="Monthly">
+                                <span class="description u-color-pri-light" data-amnt="2">+$2/mo</span>
+                            </span>
+                            <span class="hide" data-sub-duration="Yearly">
+                                <span class="description u-color-pri-light" data-amnt="20">+$20/yr</span> <br>
+                            </span>
+                        </label>
+                    </fieldset>
+                </div>
+                <div class="subscription__nav">
+                    <div class="flex-sb">
+                        <button onclick="plusContent(event,-1)" class="btn btn--transparent">Go Back</button>
+                        <button class="btn btn--blue">Next Step</button>
+                    </div>
+                </div>
+            </form>
+
+            <div data-step="summary" class="subscription__step">
+                <div class="subscription__content">
+                    <h1 class="heading-primary u-color-pri">Finishing up</h1>
+                    <p class="paragraph u-mb-medium">Double-check everything looks OK before confirming.</p>
+    
+                    <div class="u-bg-light u-br-small">
+                        <div class="u-p-medium">
+                            <p class="flex-sb">
+                                <span class="paragraph">
+                                    <span data-summary="plan-name" class="heading-tertiary u-color-pri"> </span> <br>
+                                    <a onclick="currentContent(2)" href="#" class="link">Change</a>
+                                </span>
+                                <span data-summary="plan-amnt" class="u-color-gray-dark u-color-pri u-text-bold"> </span>
+                            </p>
+                        </div>
+                        <span class="line"></span>
+                        <div data-summary="add-ons" class="u-p-medium"> </div>
+                    </div>
+                    <div class="u-p-medium">
+                        <p class="flex-sb">
+                            <span data-summary="text-total" class="description"> </span>
+                            <span data-summary="total-amnt" class="heading-secondary u-color-pri-light u-text-bold"> </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="subscription__nav">
+                    <div class="flex-sb">
+                        <button onclick="plusContent(event,-1)" class="btn btn--transparent">Go Back</button>
+                        
+                        <button onclick="plusContent(event, +1); toggleSwitch('.subscription__message', 'hide'); saveToDatabase(); resetForm('[data-form-type]');" class="btn btn--light-blue">Confirm</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subscription__message flex-sb hide">
+                <div class="u-ta-center">
+                    <span class="subscription__message-icon u-inline-bl u-mb-small">
+                        <img src="images/icon-thank-you.svg" class="svg">
+                    </span>
+                    <h1 class="heading-primary u-color-pri u-mb-tiny">Thank you!</h1>
+                    <p class="paragraph">
+                        Thanks for confirming your subscription! We hope you have fun 
+                        using our platform. If you ever need support, please feel free 
+                        to email us at support@loremgaming.com.
+                    </p>
+                </div>
+            </div>
+        </main>
+        <div class="restart-dialog-box hide">
+            <div class="">
+                <p class="paragraph u-mb-tiny"> Would you like to go back to step one? </p>
+                <div class="flex-sb">
+                    <button onclick="currentContent(1); removeEvHandler('.container', 'click', containerEleFunc); toggleSwitch('.restart-dialog-box', 'hide'); toggleSwitch('.subscription__message', 'hide')" class="btn btn--blue">Yes</button>
+                    <button class="btn btn--blue">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script/app.js"></script>
+</body>
+
+<!--
+    A sample of the Markup in the Summary section
+    <p class="flex-sb u-mb-tiny">
+        <span class="description">Online service</span>
+        <span class="description u-color-pri">+$1/mo</span>
+    </p>
+    <div class="flex-sb">
+        <span class="view">Larger storage</span>
+        <span class="description u-color-pri">+$2/mo</span>
+    </div>
+-->
+</html>
