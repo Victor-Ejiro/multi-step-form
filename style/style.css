@@ -48,7 +48,7 @@ a {
     cursor: pointer;}
 
 /* Typography */
-.heading-primary {font-size: 3.2rem; padding-bottom: .5rem;}
+.heading-primary {font-size: 3.2rem; padding-bottom: .5rem; background-color: red;}
 .heading-secondary {font-size: 1.8rem;}
 
 .heading-tertiary {
